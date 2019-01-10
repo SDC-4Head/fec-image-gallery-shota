@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const PORT = 1337;
-const mongodb = require('../db/index');
 const cassandra = require('../db/cassandra')
 
 app.use('/rooms/:id', express.static('./client/dist'));
@@ -11,7 +10,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 app.get('/rooms/:id/photos', (req, res) => {
-  cassandra.getPhotos(req.params.location_id, (err, response) => {
+  cassandra.getPhotos(req.params.id, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
@@ -21,7 +20,7 @@ app.get('/rooms/:id/photos', (req, res) => {
 });
 
 app.post('/rooms/:id/photos', (req, res) => {
-  cassandra.insertPhotos(req.params.location_id, req.params.photo_id, req.params.url, req.params.caption, (err, response) => {
+  cassandra.insertPhotos(req.params.id, req.query.photo_id, req.query.url, req.query.caption, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
@@ -32,7 +31,7 @@ app.post('/rooms/:id/photos', (req, res) => {
 
 app.put('/rooms/:id/photos', (req, res) => {
 
-  cassandra.updatePhotos(req.params.location_id, req.params.photo_id, req.params.url, req.params.caption, (err, response) => {
+  cassandra.updatePhotos(req.params.id, req.query.photo_id, req.query.url, req.query.caption, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
@@ -42,7 +41,7 @@ app.put('/rooms/:id/photos', (req, res) => {
 });
 
 app.delete('/rooms/:id/photos', (req, res) => {
-  cassandra.deletePhotos(req.params.location_id, req.params.photo_id, (err, response) => {
+  cassandra.deletePhotos(req.params.id, req.params.photo_id, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
