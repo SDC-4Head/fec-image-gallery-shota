@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
+- https://github.com/teamName/repo
 
 ## Table of Contents
 
@@ -17,7 +17,12 @@
 
 ## Usage
 
-> Some usage instructions
+| CRUD   | url               | queries                |
+| ------ | ----------------- | ---------------------- |
+| CREATE | /rooms/:id/photos | photo_id, url, caption |
+| READ   | /rooms/:id/photos |                        |
+| UPDATE | /rooms/:id/photos | photo_id, url, caption |
+| DELETE | /rooms/:id/photos | photo_id               |
 
 ## Requirements
 
@@ -36,4 +41,3 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
-
