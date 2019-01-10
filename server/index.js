@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 app.get('/rooms/:id/photos', (req, res) => {
-  cassandra.getPhotos(req.params.id, (err, response) => {
+  cassandra.getPhotos(req.params.location_id, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
@@ -21,7 +21,7 @@ app.get('/rooms/:id/photos', (req, res) => {
 });
 
 app.post('/rooms/:id/photos', (req, res) => {
-  cassandra.insertPhotos(req.params.id, req.params.url, req.params.caption, (err, response) => {
+  cassandra.insertPhotos(req.params.location_id, req.params.photo_id, req.params.url, req.params.caption, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
@@ -32,7 +32,7 @@ app.post('/rooms/:id/photos', (req, res) => {
 
 app.put('/rooms/:id/photos', (req, res) => {
 
-  cassandra.updatePhotos(req.params.id, req.params.url, req.params.caption, (err, response) => {
+  cassandra.updatePhotos(req.params.location_id, req.params.photo_id, req.params.url, req.params.caption, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
@@ -42,7 +42,7 @@ app.put('/rooms/:id/photos', (req, res) => {
 });
 
 app.delete('/rooms/:id/photos', (req, res) => {
-  cassandra.deletePhotos(req.params.id, (err, response) => {
+  cassandra.deletePhotos(req.params.location_id, req.params.photo_id, (err, response) => {
     if (err) {
       res.status(501).send();
     } else {
